@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:storio_app/view/bottom_nav.dart';
 import 'package:storio_app/view/core/style_const.dart';
 import 'package:storio_app/view/widgets/custum_textformfiled.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -46,43 +49,41 @@ class SignUpScreen extends StatelessWidget {
                           children: [
                             Column(
                               children: [
+                                Image(
+                                  width: size.width / 2,
+                                  image: const AssetImage(
+                                      'assets/images/logo 1.png'),
+                                ),
+                                height20,
                                 const Text(
-                                  "Sign Up",
+                                  "Welcome Back!",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 35,
+                                  ),
+                                ),
+                                height10,
+                                const Text(
+                                  'Sign In',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                   ),
                                 ),
-                                height10,
-                                const TextFormFieldCustom(
-                                  labelText: 'First Name',
-                                  keyboardType: TextInputType.name,
-                                  prefixIcon: Icons.person,
-                                ),
-                                const TextFormFieldCustom(
-                                  labelText: 'Last Name',
-                                  keyboardType: TextInputType.name,
-                                  prefixIcon: Icons.person,
-                                ),
+                                height20,
                                 const TextFormFieldCustom(
                                   labelText: 'User Name',
                                   keyboardType: TextInputType.name,
                                   prefixIcon: Icons.person,
                                 ),
                                 const TextFormFieldCustom(
-                                  labelText: 'Email',
-                                  keyboardType: TextInputType.emailAddress,
-                                  prefixIcon: Icons.email,
-                                ),
-                                const TextFormFieldCustom(
                                   labelText: 'Password',
                                   keyboardType: TextInputType.visiblePassword,
                                   prefixIcon: Icons.password,
                                 ),
-                                const TextFormFieldCustom(
-                                  labelText: 'Conform Password',
-                                  keyboardType: TextInputType.visiblePassword,
-                                  prefixIcon: Icons.password,
+                                TextButton(
+                                  onPressed: () {},
+                                  child: const Text('Forget Password?'),
                                 ),
                                 SizedBox(
                                   width: 350,
@@ -93,19 +94,28 @@ class SignUpScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                        CupertinoPageRoute(
+                                          builder: (context) {
+                                            return const BottomNav();
+                                          },
+                                        ),
+                                        (route) => false,
+                                      );
+                                    },
                                     child: const Text(
-                                      'Sign Up',
+                                      'Sign In',
                                     ),
                                   ),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Text('Already have an account?'),
+                                    const Text('Don’t have an account?'),
                                     TextButton(
                                         onPressed: () {},
-                                        child: const Text('Sign In'))
+                                        child: const Text('Sign Up'))
                                   ],
                                 )
                               ],

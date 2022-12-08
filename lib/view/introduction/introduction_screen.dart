@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:storio_app/view/core/style_const.dart';
-import 'package:storio_app/view/sign_in_screen/sign_in_screen.dart';
-import 'package:storio_app/view/sign_up_screen/sign_up_screen.dart';
+import 'package:storio_app/view/sign_in/sign_in_screen.dart';
+import 'package:storio_app/view/sign_up/sign_up_screen.dart';
 
 class IntroductionScreen extends StatelessWidget {
   const IntroductionScreen({super.key});
