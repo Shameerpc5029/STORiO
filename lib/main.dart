@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storio_app/view/introduction%20screen/introduction_screen.dart';
 
 void main(List<String> args) {
   runApp(
@@ -11,6 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
+      home: const IntroductionScreen(),
+    );
   }
 }
