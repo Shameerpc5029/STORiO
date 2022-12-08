@@ -1,8 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:storio_app/view/bottom_nav.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:storio_app/controller/providers/sign_in_provider.dart';
 import 'package:storio_app/view/core/style_const.dart';
 import 'package:storio_app/view/widgets/custum_textformfiled.dart';
+
+GlobalKey<FormState> formKey = GlobalKey();
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -10,7 +14,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    final provider = Provider.of<SignInProvider>(context);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -47,78 +51,121 @@ class SignInScreen extends StatelessWidget {
                         child: ListView(
                           shrinkWrap: true,
                           children: [
-                            Column(
-                              children: [
-                                Image(
-                                  width: size.width / 2,
-                                  image: const AssetImage(
-                                      'assets/images/logo 1.png'),
-                                ),
-                                height20,
-                                const Text(
-                                  "Welcome Back!",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 35,
+                            Form(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              key: formKey,
+                              child: Column(
+                                children: [
+                                  Image(
+                                    width: size.width / 2,
+                                    image: const AssetImage(
+                                        'assets/images/logo 1.png'),
                                   ),
-                                ),
-                                height10,
-                                const Text(
-                                  'Sign In',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                  height20,
+                                  const Text(
+                                    "Welcome Back!",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 35,
+                                    ),
                                   ),
-                                ),
-                                height20,
-                                const TextFormFieldCustom(
-                                  labelText: 'User Name',
-                                  keyboardType: TextInputType.name,
-                                  prefixIcon: Icons.person,
-                                ),
-                                const TextFormFieldCustom(
-                                  labelText: 'Password',
-                                  keyboardType: TextInputType.visiblePassword,
-                                  prefixIcon: Icons.password,
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: const Text('Forget Password?'),
-                                ),
-                                SizedBox(
-                                  width: 350,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 3,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
+                                  height10,
+                                  const Text(
+                                    'Sign In',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  height20,
+                                  TextFormFieldCustom(
+                                    validator: ((value) {
+                                      if (value!.isEmpty) {
+                                        return "Enter Your User Name";
+                                      } else {
+                                        return null;
+                                      }
+                                    }),
+                                    labelText: 'User Name',
+                                    keyboardType: TextInputType.name,
+                                    prefixIcon: FontAwesomeIcons.user,
+                                    controller: provider.email,
+                                  ),
+                                  TextFormFieldCustom(
+                                    validator: ((value) {
+                                      if (value!.isEmpty) {
+                                        return "Enter Your Password";
+                                      }
+                                      if (value.length < 8) {
+                                        return "Password length must be atleast 8 characters";
+                                      } else {
+                                        return null;
+                                      }
+                                    }),
+                                    labelText: 'Password',
+                                    keyboardType: TextInputType.visiblePassword,
+                                    prefixIcon: FontAwesomeIcons.lock,
+                                    controller: provider.password,
+                                    obscureText: provider.obscureText,
+                                    suffix: IconButton(
+                                      onPressed: () {
+                                        provider.passwordIsVisble();
+                                      },
+                                      icon: Icon(
+                                        !provider.obscureText
+                                            ? FontAwesomeIcons.eye
+                                            : FontAwesomeIcons.eyeSlash,
+                                        size: 20,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                        CupertinoPageRoute(
-                                          builder: (context) {
-                                            return const BottomNav();
-                                          },
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: const Text('Forget Password?'),
+                                  ),
+                                  SizedBox(
+                                    width: 350,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 3,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
                                         ),
-                                        (route) => false,
-                                      );
-                                    },
-                                    child: const Text(
-                                      'Sign In',
+                                      ),
+                                      onPressed: () {
+                                        provider.goToHome(context);
+                                      },
+                                      child: const Text(
+                                        'Sign In',
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text('Don’t have an account?'),
-                                    TextButton(
-                                        onPressed: () {},
-                                        child: const Text('Sign Up'))
-                                  ],
-                                )
-                              ],
+                                  height10,
+                                  RichText(
+                                    text: TextSpan(
+                                      text: 'Don’t have an account?',
+                                      style: const TextStyle(
+                                        color: blacColor,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: ' Sign Up',
+                                          style: const TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              provider.goToSignUp(context);
+                                            },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),

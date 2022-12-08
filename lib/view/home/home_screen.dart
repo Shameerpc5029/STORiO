@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storio_app/view/core/style_const.dart';
 import 'package:storio_app/view/home/widgets/home_item_list.dart';
+import 'package:storio_app/view/introduction/introduction_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,11 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const IntroductionScreen(),
+              ));
+            },
             icon: const Icon(
               Icons.add_circle,
               size: 30,

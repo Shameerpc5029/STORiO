@@ -9,7 +9,7 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        leadingWidth: 10,
+        leadingWidth: 20,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -45,11 +45,13 @@ class ChatScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: screenGradiant,
         ),
-        child:Column(
-          children: [
-            Expanded(child: ClipRRect())
+        child: Column(
+          children: const [
+            Expanded(
+              child: ClipRRect(),
+            )
           ],
-        ) ,
+        ),
       ),
     );
   }

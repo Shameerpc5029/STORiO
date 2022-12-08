@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:storio_app/view/core/style_const.dart';
 
 class HomeItemList extends StatelessWidget {
@@ -54,23 +55,23 @@ class HomeItemList extends StatelessWidget {
             IconButton(
               onPressed: () {},
               icon: const Icon(
-                Icons.favorite,
+                FontAwesomeIcons.solidHeart,
                 color: Colors.red,
-                size: 30,
+                size: 25,
               ),
             ),
             IconButton(
               onPressed: () {},
               icon: const Icon(
-                Icons.comment_outlined,
-                size: 30,
+                FontAwesomeIcons.solidCommentDots,
+                size: 25,
               ),
             ),
             IconButton(
               onPressed: () {},
               icon: const Icon(
-                Icons.near_me_rounded,
-                size: 30,
+                FontAwesomeIcons.share,
+                size: 25,
               ),
             ),
             const Spacer(),
@@ -78,7 +79,7 @@ class HomeItemList extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(
                 Icons.bookmarks_outlined,
-                size: 30,
+                size: 25,
               ),
             ),
           ],

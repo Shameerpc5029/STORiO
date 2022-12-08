@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:storio_app/view/home/home_screen.dart';
 import 'package:storio_app/view/message/message_screen.dart';
 import 'package:storio_app/view/profile/profile_screen.dart';
@@ -33,13 +34,13 @@ class _BottomNavState extends State<BottomNav> {
         rightCornerRadius: 30,
         elevation: 10,
         activeColor: Colors.blue[800],
-        iconSize: 30,
+        iconSize: 25,
         icons: const [
-          Icons.home,
-          Icons.search,
-          Icons.message,
-          Icons.person,
-          Icons.settings,
+          FontAwesomeIcons.house,
+          FontAwesomeIcons.magnifyingGlass,
+          FontAwesomeIcons.message,
+          FontAwesomeIcons.user,
+          FontAwesomeIcons.gears,
         ],
         activeIndex: currentIndex,
         onTap: ((value) {
